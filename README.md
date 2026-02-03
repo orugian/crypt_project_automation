@@ -1,107 +1,123 @@
 NETRUNNER // CRYPTO_MODULE
-==========================
+--------------------------
 
-A no-nonsense, terminal-based Python encryption utility designed for immediate file locking. It utilizes Fernet symmetric encryption to secure payloads directly within the terminal, offering a clean "Hacker UI" experience.
+Uma utilidade de criptografia Python baseada em terminal, projetada para o bloqueio imediato de arquivos. Utiliza criptografia simétrica Fernet para proteger arquivos diretamente no terminal, oferecendo uma experiência limpa e amigavel.
 
-> Note: This project focuses on functionality and efficiency, stripping away graphical overhead for raw command-line control.
+### ⚠️ AVISO: CRIPTOGRAFIA DESTRUTIVA
 
-⚠️ WARNING: DESTRUCTIVE ENCRYPTION
-----------------------------------
+Esta ferramenta realiza criptografia **in-place** (no local). Quando você criptografa um arquivo, ele **sobrescreve os dados originais**. O arquivo permanece no mesmo local, mas torna-se ilegível sem a chave gerada.
 
-This tool performs in-place encryption. When you encrypt a file, it overwrites the original data. The file remains in the same location but becomes unreadable without the generated key.
+> **Não teste isso em arquivos dos quais você não possa perder o acesso imediato.**
 
-*Do not test this on files you are not willing to lose immediate access to.*
+* * * * *
 
-Installation
-------------
+### Instalação
 
-1.  Ensure you have Python installed.
-2.  Install the cryptography dependency via pip:
+Certifique-se de ter o Python instalado. Instale a dependência `cryptography` via pip:
+
+Bash
 
 ```
 pip install cryptography
+
 ```
 
-Usage
------
+### Uso
 
-Run the script directly from your terminal:
+Execute o script diretamente do seu terminal:
 
-bash
+Bash
 
+```
 python terminal_crypt.py
 
-### Interface Guide
+```
 
-The application launches a terminal menu system:
+* * * * *
 
-1.  ENCRYPT (OVERWRITE): Select this to lock a file.
-    -   Select the target file (supports drag-and-drop).
-    -   Confirm overwrite.
-    -   The tool generates a key, saves it to `[filename].key`, and prints the hash to the terminal.
-2.  DECRYPT (RESTORE): Select this to recover a file.
-    -   Select the locked file.
-    -   Select the associated `.key` file.
-    -   The tool restores the original file contents.
+### Guia da Interface
 
-Project Files
--------------
+A aplicação inicia um sistema de menu no terminal:
 
--   `terminal_crypt.py`: The main executable script.
--   `README.md`: This documentation file.
--   `teste_files/`: (Example usage folder containing test scripts).
--   `images/`: (Screenshots of the tool in action).
+-   **ENCRYPT (OVERWRITE):** Selecione esta opção para bloquear um arquivo.
 
-Features
---------
+    1.  Selecione o arquivo de destino (suporta arrastar e soltar).
 
--   Instant Locking: No temporary copies. The file is encrypted in place.
--   Key Persistence: Automatically saves a `.key` file alongside the encrypted payload.
--   Hash Visibility: Prints the generated key to the terminal for immediate clipboard copying.
--   Robust UX: Handles path formatting and validates file existence before execution.
+    2.  Confirme a sobrescrita.
 
-Example Workflow
-----------------
+    3.  A ferramenta gera uma chave, salva-a em `[nome_do_arquivo].key` e exibe o hash no terminal.
 
-### Encryption
+-   **DECRYPT (RESTORE):** Selecione esta opção para recuperar um arquivo.
 
-text
+    1.  Selecione o arquivo bloqueado.
 
+    2.  Selecione o arquivo `.key` associado.
+
+    3.  A ferramenta restaura o conteúdo original do arquivo.
+
+* * * * *
+
+### Arquivos do Projeto
+
+-   `terminal_crypt.py`: O script executável principal.
+
+-   `README.md`: Este arquivo de documentação.
+
+-   `teste_files/`: (Pasta de exemplo contendo scripts de teste).
+
+-   `images/`: (Capturas de tela da ferramenta em ação).
+
+* * * * *
+
+### Funcionalidades
+
+-   **Bloqueio Instantâneo:** Sem cópias temporárias. O arquivo é criptografado no local.
+
+-   **Persistência de Chave:** Salva automaticamente um arquivo `.key` junto ao arquivo criptografado.
+
+-   **Visibilidade do Hash:** Exibe a chave gerada no terminal para cópia imediata.
+
+-   **UX Robusta:** Gerencia a formatação de caminhos (paths) e valida a existência do arquivo antes da execução.
+
+* * * * *
+
+### Exemplo de Fluxo de Trabalho
+
+#### Criptografia
+
+
+```
 > SELECT TARGET FILE PATH:
+>> "C:\Users\LO\Documents\segredos.txt"
 
->> "C:\Users\LO\Documents\secrets.txt"
-
-[WARNING] THIS WILL OVERWRITE: secrets.txt
-
+[WARNING] THIS WILL OVERWRITE: segredos.txt
 > CONFIRM OVERWRITE? [Y/N]: Y
 
 > GENERATING KEY HASH...
-
 [SUCCESS] PAYLOCK ENGAGED.
-
 >> KEY HASH (COPY THIS):
-
 ----------------------------------------
-
 gAAAAABlXy...
-
 ----------------------------------------
 
-### Decryption
+```
 
-text
+#### Descriptografia
 
+
+```
 > SELECT TARGET FILE PATH:
+>> "C:\Users\LO\Documents\segredos.txt"
 
->> "C:\Users\LO\Documents\secrets.txt"
-
-> ENTER KEY FILE PATH: "C:\Users\LO\Documents\secrets.txt.key"
+> ENTER KEY FILE PATH: "C:\Users\LO\Documents\segredos.txt.key"
 
 > DECRYPTING STREAM...
-
 [SUCCESS] PAYLOAD RESTORED.
 
-Credits
--------
+```
 
-Built with Python and `cryptography.fernet`. Designed for efficient script automation and protection.
+* * * * *
+
+### Créditos
+
+Construído com Python e `cryptography.fernet`. Projetado para automação de scripts.
